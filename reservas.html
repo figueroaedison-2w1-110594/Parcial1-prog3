@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Morrison - Reservas</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+
+<body>
+    <div class="container-fluid bg-success">
+        <div class="text-center py-5 "></div>
+        <img src="img/logo.jpg" height="90px" width="120px">
+    </div>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand">
+                Morrison Hotel
+            </a>
+
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav mr-auto">
+                    <li class="navbar-item active"><a href="index.html" class="nav-link">Galeria</a></li>
+                    <li class="navbar-item active"><a href="habitaciones.html" class="nav-link">Habitaciones</a></li>
+                    <li class="navbar-item active"><a href="reservas.html" class="nav-link">Reservas</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <br><br><br><br>
+    <div class="container">
+        <form class="form-row">
+            <div class="row">
+                <div class="form-group ">
+                    <div class="col-md-8 col-offset-4">
+                        <h4>Haga su reserva llenando el siguiente formulario </h4> <br> <br>
+                        <label>Nombre:</label> <br>
+                        <input type="text" class="form-control" placeholder="Nombre" id="txtNombre"> <br> <br>
+                        <label>Telefono:</label> <br>
+
+                        <input type="text" class="form-control" placeholder="Telefono" id="txtTelefono"> <br> <br>
+                        <label>Tipo de habitacion: </label> 
+                        <select class="form-control" id="tipoHabitacion">
+                            <option value="">Seleccione</option>
+                            <option value="Habitacion simple">Habitacion simple</option>
+                            <option value="Habitacion doble">Habitacion doble</option>
+                            <option value="Habitacion triple">Habitacion triple</option>
+                            <option value="Departamento">Departamento</option>
+                        </select><br>
+
+                        <label for="fechaIngreso">Fecha de ingreso</label>
+                        <input type="date" id="fechaIngreso" class="form-control">
+
+                        <label for="chkCochera">Necesita cochera?</label>
+                        <input type="checkbox" id="chkCochera">
+                        <br>
+
+                        <button type="button" onclick="guardar();">Registrar reserva</button>
+
+                    </div>
+                </div>
+        </form>
+    </div>
+</body>
+<script>
+    errors = [];
+    function validar() {
+        validado = true;
+        errors = [];
+
+        if(document.getElementById("txtNombre").value === "") {
+            validado = false;
+            errors.push("Nombre");
+        }
+        
+        if(document.getElementById("txtTelefono").value === "") {
+            validado = false;
+            errors.push("Telefono");
+        }
+
+        if(document.getElementById("tipoHabitacion").value === "") {
+            validado = false;
+            errors.push("Tipo de habitacion");
+        }
+
+        if(document.getElementById("fechaIngreso").value === "") {
+            validado = false;
+            errors.push("Fecha");
+        }
+
+        return validado;
+    }
+
+    function guardar() {
+        validar();
+        if(errors.length > 0) {
+            let displayErrores = "";
+            for(i = 0; i < errors.length; i++) {
+                displayErrores += errors[i] + ", ";
+            }
+            return alert("Por favor verifique los siguientes datos: " + displayErrores);
+        }else{
+            let textAlert = "Estos son los datos de su reserva:";
+            textAlert+= " Telefono: " + document.getElementById("txtTelefono").value + ";";
+            textAlert+= " Tipo de habitacion: " + document.getElementById("tipoHabitacion").value + ";";
+            textAlert+= " Fecha de ingreso: " + document.getElementById("fechaIngreso").value + ";";
+
+            return alert("Estos son los datos de su reserva" + textAlert);
+        }
+    }
+</script>
